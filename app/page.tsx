@@ -8,6 +8,7 @@ function initials(name: string) {
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
+  interior: "🛋️", design: "🛋️",
   plumbing: "🔧", plumber: "🔧",
   electrical: "⚡", electrician: "⚡",
   tutoring: "📚", tutor: "📚", education: "📚",
@@ -34,11 +35,11 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 function categoryIcon(name: string, icon: string): string {
-  if (icon && icon !== "?" && !icon.includes("?")) return icon;
   const key = name.toLowerCase().replace(/\s+/g, "_");
   for (const [k, v] of Object.entries(CATEGORY_ICONS)) {
     if (key.includes(k)) return v;
   }
+  if (icon && !/^\?+$/.test(icon.trim()) && icon.trim().length > 0) return icon;
   return "🛠️";
 }
 
