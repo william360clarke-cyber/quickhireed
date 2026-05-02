@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 interface Props {
   user: any;
@@ -184,11 +185,11 @@ export default function DashboardClient({
 
         {/* Sign out */}
         <div className="px-5 pb-6">
-          <Link href="/api/auth/signout?callbackUrl=/"
-            className="block text-xs text-center py-2 rounded-lg"
-            style={{ color: "var(--warm-mid, #5a4a3d)", border: "1px solid rgba(255,255,255,0.07)" }}>
+          <button onClick={() => signOut({ callbackUrl: "/" })}
+            className="block w-full text-xs text-center py-2 rounded-lg cursor-pointer"
+            style={{ color: "var(--warm-mid, #5a4a3d)", border: "1px solid rgba(255,255,255,0.07)", background: "transparent" }}>
             Sign Out
-          </Link>
+          </button>
         </div>
       </aside>
 
@@ -211,7 +212,7 @@ export default function DashboardClient({
                     style={{ background: "var(--ember, #c45c1a)", fontSize: "0.6rem" }}>{unreadCount}</span>
                 )}
               </button>
-              <Link href="/api/auth/signout?callbackUrl=/" className="hover:text-slate-900 transition-colors">Logout</Link>
+              <button onClick={() => signOut({ callbackUrl: "/" })} className="hover:text-slate-900 transition-colors" style={{ background: "none", border: "none", cursor: "pointer", padding: 0, font: "inherit" }}>Logout</button>
             </div>
           </div>
         </header>
