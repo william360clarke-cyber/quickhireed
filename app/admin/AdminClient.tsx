@@ -323,7 +323,7 @@ export default function AdminClient({
         </nav>
 
         <div style={{ padding: "16px 20px 28px" }}>
-          <button onClick={() => signOut({ callbackUrl: "/" })} style={{ display: "block", width: "100%", textAlign: "center", padding: "9px 16px", fontSize: "0.78rem", color: "rgba(245,240,232,0.35)", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, cursor: "pointer" }}>
+          <button onClick={() => signOut({ redirect: false }).then(() => window.location.href = "/")} style={{ display: "block", width: "100%", textAlign: "center", padding: "9px 16px", fontSize: "0.78rem", color: "rgba(245,240,232,0.35)", background: "transparent", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, cursor: "pointer" }}>
             Sign Out
           </button>
         </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { auth, signOut } from "@/lib/auth";
+import { auth } from "@/lib/auth";
+import LogoutButton from "@/app/components/LogoutButton";
 
 function initials(name: string) {
   return name.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2);
@@ -49,10 +50,7 @@ export default async function HomePage() {
                 )}
                 <Link href="/dashboard" className="hover:opacity-70 transition-opacity"
                   style={{ color: "var(--warm-mid, #5a4a3d)" }}>Dashboard</Link>
-                <form action={async () => { "use server"; await signOut({ redirectTo: "/" }); }}>
-                  <button type="submit" className="hover:opacity-70 transition-opacity"
-                    style={{ color: "var(--warm-mid, #5a4a3d)", background: "none", border: "none", cursor: "pointer", padding: 0, font: "inherit" }}>Logout</button>
-                </form>
+                <LogoutButton className="hover:opacity-70 transition-opacity" style={{ color: "var(--warm-mid, #5a4a3d)" }}>Logout</LogoutButton>
               </>
             ) : (
               <>
