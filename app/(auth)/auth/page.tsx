@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -32,8 +32,13 @@ function AuthForm() {
     if (res?.error) {
       setError("Invalid email or password.");
     } else {
-      const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
-      router.push(callbackUrl);
+      const session = await getSession();
+      if ((session?.user as any)?.userType === "admin") {
+        router.push("/admin");
+      } else {
+        const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
+        router.push(callbackUrl);
+      }
     }
   }
 
