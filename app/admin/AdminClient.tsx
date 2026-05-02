@@ -322,7 +322,7 @@ export default function AdminClient({
         </nav>
 
         <div style={{ padding: "16px 20px 28px" }}>
-          <Link href="/api/auth/signout" style={{ display: "block", textAlign: "center", padding: "9px 16px", fontSize: "0.78rem", color: "rgba(245,240,232,0.35)", textDecoration: "none", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6 }}>
+          <Link href="/api/auth/signout?callbackUrl=/" style={{ display: "block", textAlign: "center", padding: "9px 16px", fontSize: "0.78rem", color: "rgba(245,240,232,0.35)", textDecoration: "none", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6 }}>
             Sign Out
           </Link>
         </div>

@@ -49,7 +49,7 @@ export default async function HomePage() {
                 )}
                 <Link href="/dashboard" className="hover:opacity-70 transition-opacity"
                   style={{ color: "var(--warm-mid, #5a4a3d)" }}>Dashboard</Link>
-                <Link href="/api/auth/signout" className="hover:opacity-70 transition-opacity"
+                <Link href="/api/auth/signout?callbackUrl=/" className="hover:opacity-70 transition-opacity"
                   style={{ color: "var(--warm-mid, #5a4a3d)" }}>Logout</Link>
               </>
             ) : (
