@@ -7,6 +7,41 @@ function initials(name: string) {
   return name.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2);
 }
 
+const CATEGORY_ICONS: Record<string, string> = {
+  plumbing: "🔧", plumber: "🔧",
+  electrical: "⚡", electrician: "⚡",
+  tutoring: "📚", tutor: "📚", education: "📚",
+  cleaning: "🧹", cleaner: "🧹",
+  carpentry: "🪚", carpenter: "🪚",
+  landscaping: "🌿", gardening: "🌿", garden: "🌿",
+  painting: "🎨", painter: "🎨",
+  security: "🔒", guard: "🔒",
+  catering: "🍽️", chef: "🍽️", cooking: "🍽️",
+  moving: "📦", mover: "📦",
+  photography: "📸", photographer: "📸",
+  beauty: "💄", makeup: "💄", hair: "💇",
+  healthcare: "🏥", medical: "🏥", health: "🏥",
+  tech: "💻", it: "💻", computer: "💻",
+  auto: "🚗", car: "🚗", mechanic: "🚗",
+  fitness: "🏋️", gym: "🏋️", trainer: "🏋️",
+  music: "🎵", musician: "🎵",
+  pest: "🐛", pest_control: "🐛",
+  laundry: "👕", washing: "👕",
+  ac: "❄️", aircon: "❄️", hvac: "❄️",
+  delivery: "🚚", courier: "🚚",
+  event: "🎉", events: "🎉",
+  welding: "⚙️", welder: "⚙️",
+};
+
+function categoryIcon(name: string, icon: string): string {
+  if (icon && icon !== "?" && !icon.includes("?")) return icon;
+  const key = name.toLowerCase().replace(/\s+/g, "_");
+  for (const [k, v] of Object.entries(CATEGORY_ICONS)) {
+    if (key.includes(k)) return v;
+  }
+  return "🛠️";
+}
+
 export default async function HomePage() {
   const session = await auth();
 
@@ -131,7 +166,7 @@ export default async function HomePage() {
               {categories.map((cat) => (
                 <div key={cat.id} className="rounded-xl p-6 flex flex-col"
                   style={{ background: "var(--card-bg, #fff)", border: "1px solid var(--border, #e8ddd5)" }}>
-                  <span className="text-4xl mb-4">{cat.icon}</span>
+                  <span className="text-4xl mb-4">{categoryIcon(cat.name, cat.icon)}</span>
                   <h3 className="font-semibold mb-1" style={{ color: "var(--bark, #2a1e15)" }}>{cat.name}</h3>
                   <p className="text-sm flex-1 mb-5" style={{ color: "var(--sand, #8c7b6e)" }}>{cat.description}</p>
                   <Link href={`/categories?category=${encodeURIComponent(cat.filterKey)}`}
