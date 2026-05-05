@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { createNotification } from "@/lib/notifications";
+import { geocodeAndCache } from "@/lib/geocode";
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const session = await auth();
@@ -61,6 +62,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       `${providerName} has accepted your booking. Your service is confirmed for ${new Date(booking.bookingDate).toLocaleDateString("en-GH", { timeZone: "Africa/Accra" })}.`,
       "/dashboard"
     );
+    await geocodeAndCache(bookingId);
   } else if (status === "completed") {
     await createNotification(
       booking.user.id,

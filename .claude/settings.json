@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m 'Redirect admin users to /admin dashboard on login *)",
+      "Bash(git push *)",
+      "Bash(npx prisma *)",
+      "Bash(git commit -m 'Fix admin redirect: fetch fresh session after sign-in *)",
+      "Bash(git commit -m 'Redirect to homepage after sign out *)",
+      "Bash(git commit -m 'Fix sign-out: use signOut\\(\\) instead of direct API link to avoid DEPLOYMENT_NOT_FOUND *)",
+      "Bash(git commit -m 'Fix sign-out: bypass NEXTAUTH_URL by using redirect:false then window.location *)",
+      "Bash(node_modules/.bin/prisma db *)",
+      "Bash(node -e ' *)",
+      "Bash(git commit -m 'Replace question mark icons in Popular Services with matching emojis *)",
+      "Bash(git commit -m 'Always resolve category icon from name lookup, not stored DB value *)"
+    ]
+  }
+}

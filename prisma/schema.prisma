@@ -156,6 +156,9 @@ model Booking {
   notes       String?       @db.Text
   status      BookingStatus @default(pending)
   createdAt   DateTime      @default(now()) @map("created_at")
+  latitude    Decimal?      @db.Decimal(10, 7)
+  longitude   Decimal?      @db.Decimal(10, 7)
+  geocodedAt  DateTime?     @map("geocoded_at")
 
   user       User            @relation("CustomerBookings", fields: [userId], references: [id])
   provider   ServiceProvider @relation("ProviderBookings", fields: [providerId], references: [id])

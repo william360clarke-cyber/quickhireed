@@ -1,9 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+
+const BookingMap = dynamic(
+  () => import("@/app/components/BookingMap"),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-80 bg-slate-100 rounded animate-pulse" />
+    ),
+  }
+);
 
 interface Props {
   user: any;
@@ -474,8 +485,15 @@ function BookingCard({ booking: b, role, loadingId, onAction }: {
   booking: any; role: "customer" | "provider";
   loadingId: number | null; onAction: (id: number, status: string) => void;
 }) {
+  const [mapOpen, setMapOpen] = useState(false);
   const counterparty = role === "customer" ? b.provider?.user?.fullName : b.user?.fullName;
   const counterLabel = role === "customer" ? "Provider" : "Customer";
+
+  const hasCoords = b.latitude != null && b.longitude != null;
+  const showMap =
+    hasCoords &&
+    (b.status === "accepted" || b.status === "completed");
+  const showDirections = role === "provider" && b.status === "accepted" && hasCoords;
 
   return (
     <div className="bg-white rounded-xl p-5" style={{ border: "1px solid var(--border, #e8ddd5)" }}>
@@ -494,6 +512,41 @@ function BookingCard({ booking: b, role, loadingId, onAction }: {
           <span className="font-bold text-sm" style={{ color: "var(--bark, #2a1e15)" }}>GH₵ {Number(b.service?.price ?? 0).toFixed(2)}</span>
         </div>
       </div>
+
+      {showMap && (
+        <div className="mt-3 pt-3" style={{ borderTop: "1px solid var(--parchment, #f5ede4)" }}>
+          <div className="flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => setMapOpen((o) => !o)}
+              className="text-sm font-medium hover:underline"
+              style={{ color: "var(--ember, #c45c1a)", background: "none", border: "none", cursor: "pointer", padding: 0 }}
+            >
+              {mapOpen ? "Hide map" : "View on map"}
+            </button>
+            {showDirections && (
+              <a
+                href={`https://www.openstreetmap.org/directions?to=${b.latitude},${b.longitude}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium hover:underline"
+                style={{ color: "var(--ember, #c45c1a)" }}
+              >
+                Get Directions ↗
+              </a>
+            )}
+          </div>
+          {mapOpen && (
+            <div className="mt-3 overflow-hidden rounded-lg" style={{ border: "1px solid var(--border, #e8ddd5)" }}>
+              <BookingMap
+                lat={Number(b.latitude)}
+                lng={Number(b.longitude)}
+                address={b.address ?? ""}
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       {b.payment?.paymentStatus === "completed" && (
         <div className="flex gap-3 mt-3 pt-3" style={{ borderTop: "1px solid var(--parchment, #f5ede4)" }}>
