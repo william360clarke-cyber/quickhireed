@@ -12,7 +12,28 @@
       "Bash(node_modules/.bin/prisma db *)",
       "Bash(node -e ' *)",
       "Bash(git commit -m 'Replace question mark icons in Popular Services with matching emojis *)",
-      "Bash(git commit -m 'Always resolve category icon from name lookup, not stored DB value *)"
+      "Bash(git commit -m 'Always resolve category icon from name lookup, not stored DB value *)",
+      "Bash(npm install *)",
+      "Bash(\"/c/Program Files/nodejs/npm\" install leaflet react-leaflet @types/leaflet --save)",
+      "Bash(cmd.exe /C \"cd C:\\\\Users\\\\user\\\\Desktop\\\\quickhire\\\\quickhires-main && npm install leaflet react-leaflet @types/leaflet --save\")",
+      "Read(//usr/bin/**)",
+      "Bash(\"/c/Program Files/nodejs/npm.cmd\" --version)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(\"/c/Program Files/nodejs/npm.cmd\" install leaflet react-leaflet @types/leaflet --save)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" prisma migrate dev --name add_booking_coords)",
+      "Bash(\"/c/Program Files/nodejs/node.exe\" -e \"require\\('leaflet'\\); console.log\\('leaflet ok'\\)\")",
+      "Bash(\"/c/Program Files/nodejs/npm.cmd\" install leaflet react-leaflet @types/leaflet)",
+      "Bash(echo \"EXIT_CODE=$?\")",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" prisma db push)",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" tsc --noEmit)",
+      "Bash(\"/c/Program Files/nodejs/npm.cmd\" run lint)",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" eslint lib/geocode.ts app/components/BookingMap.tsx)",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" eslint \"app/api/bookings/[id]/route.ts\")",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" prisma db execute --stdin)",
+      "Bash(\"/c/Program Files/nodejs/npx.cmd\" prisma db execute --file -)",
+      "Bash('/c/Program Files/nodejs/node.exe' -e ' *)",
+      "Bash(git rebase *)"
     ]
   }
 }
